@@ -9,7 +9,7 @@ pub fn combat(ecs: &mut SubWorld, commands: &mut CommandBuffer) {
         .iter(ecs)
         .map(|(entity, attack)| (*entity, attack.victim))
         .collect();
-    victims.iter().for_each(|(message, victim)| {
+    for (message, victim) in victims.iter() {
         if let Ok(mut health) = ecs
             .entry_mut(*victim)
             .unwrap()
@@ -23,5 +23,5 @@ pub fn combat(ecs: &mut SubWorld, commands: &mut CommandBuffer) {
             println!("Health after attack: {}", health.current);
         }
         commands.remove(*message);
-    })
+    }
 }

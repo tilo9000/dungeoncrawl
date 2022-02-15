@@ -46,5 +46,5 @@ pub fn random_moves(ecs: &mut SubWorld, commands: &mut CommandBuffer) {
                 },
             ));
         }
-    })
+    });
 }

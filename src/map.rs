@@ -32,10 +32,10 @@ impl Map {
     }
 
     pub fn try_idx(&self, point: Point) -> Option<usize> {
-        if !self.in_bounds(point) {
-            None
-        } else {
+        if self.in_bounds(point) {
             Some(map_idx(point.x, point.y))
+        } else {
+            None
         }
     }
 }

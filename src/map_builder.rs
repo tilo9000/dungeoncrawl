@@ -47,7 +47,7 @@ impl MapBuilder {
                         self.map.tiles[idx] = TileType::Floor;
                     }
                 });
-                self.rooms.push(room)
+                self.rooms.push(room);
             }
         }
     }

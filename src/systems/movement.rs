@@ -19,7 +19,7 @@ pub fn movement(
             .get_component::<Player>()
             .is_ok()
         {
-            camera.on_player_move(want_move.destination)
+            camera.on_player_move(want_move.destination);
         }
     }
     commands.remove(*entity);

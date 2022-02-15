@@ -62,7 +62,7 @@ pub fn player_input(
                 .unwrap()
                 .get_component_mut::<Health>()
             {
-                health.current = i32::min(health.max, health.current + 1)
+                health.current = i32::min(health.max, health.current + 1);
             }
         }
         *turn_state = TurnState::PlayerTurn;
