@@ -9,7 +9,7 @@ pub fn combat(ecs: &mut SubWorld, commands: &mut CommandBuffer) {
         .iter(ecs)
         .map(|(entity, attack)| (*entity, attack.victim))
         .collect();
-    for (message, victim) in victims.iter() {
+    for (message, victim) in &victims {
         if let Ok(mut health) = ecs
             .entry_mut(*victim)
             .unwrap()
