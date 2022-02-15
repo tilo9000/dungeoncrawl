@@ -8,7 +8,7 @@ pub fn hud(ecs: &SubWorld) {
     let player_heath = health_query.iter(ecs).nth(0).unwrap();
 
     let mut draw_batch = DrawBatch::new();
-    draw_batch.target(2);
+    draw_batch.target(HUD_LAYER);
     draw_batch.print_centered(1, "Explore the dungeon, cursor keys to move.");
     draw_batch.bar_horizontal(
         Point::zero(),
