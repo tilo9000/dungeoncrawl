@@ -8,10 +8,10 @@ pub fn map_render(#[resource] map: &Map, #[resource] camera: &Camera) {
         for x in camera.left_x..camera.right_x {
             let pt = Point::new(x, y);
             let offset = Point::new(camera.left_x, camera.top_y);
-            if map.in_bounds(pt) {
-                let idx = map_idx(x, y);
+            if Map::in_bounds(pt) {
+                let idx = get_idx(x, y);
 
-                let glyph = match map.tiles[idx] {
+                let glyph = match map.tiles.get(idx).unwrap() {
                     TileType::Floor => to_cp437('.'),
                     TileType::Wall => to_cp437('#'),
                 };

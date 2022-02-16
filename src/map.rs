@@ -12,7 +12,7 @@ pub struct Map {
     pub tiles: Vec<TileType>,
 }
 
-pub fn map_idx(x: i32, y: i32) -> usize {
+pub fn get_idx(x: i32, y: i32) -> usize {
     ((y * SCREEN_WIDTH) + x) as usize
 }
 
@@ -23,17 +23,17 @@ impl Map {
         }
     }
 
-    pub fn in_bounds(&self, point: Point) -> bool {
+    pub fn in_bounds(point: Point) -> bool {
         point.x >= 0 && point.x < SCREEN_WIDTH && point.y >= 0 && point.y < SCREEN_HEIGHT
     }
 
     pub fn can_enter_tile(&self, point: Point) -> bool {
-        self.in_bounds(point) && self.tiles[map_idx(point.x, point.y)] == TileType::Floor
+        Map::in_bounds(point) && self.tiles[get_idx(point.x, point.y)] == TileType::Floor
     }
 
-    pub fn try_idx(&self, point: Point) -> Option<usize> {
-        if self.in_bounds(point) {
-            Some(map_idx(point.x, point.y))
+    pub fn try_idx(point: Point) -> Option<usize> {
+        if Map::in_bounds(point) {
+            Some(get_idx(point.x, point.y))
         } else {
             None
         }
