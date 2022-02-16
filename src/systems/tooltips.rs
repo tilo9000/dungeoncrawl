@@ -1,5 +1,6 @@
 use crate::prelude::*;
 
+#[allow(clippy::trivially_copy_pass_by_ref)]
 #[system]
 #[read_component(Point)]
 #[read_component(Name)]

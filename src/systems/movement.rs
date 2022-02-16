@@ -1,5 +1,5 @@
 use crate::prelude::*;
-
+#[allow(clippy::trivially_copy_pass_by_ref)]
 #[system(for_each)]
 #[read_component(Player)]
 pub fn movement(

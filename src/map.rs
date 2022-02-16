@@ -12,6 +12,7 @@ pub struct Map {
     pub tiles: Vec<TileType>,
 }
 
+#[allow(clippy::cast_sign_loss)]
 pub fn get_idx(x: i32, y: i32) -> usize {
     ((y * SCREEN_WIDTH) + x) as usize
 }
