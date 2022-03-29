@@ -50,7 +50,7 @@ pub fn apply(mb: &mut MapBuilder, rng: &mut RandomNumberGenerator) {
         let can_place = dimensions.point_set().iter().any(|pt| {
             let idx = mb.map.point2d_to_index(*pt);
             let distance = dijkstra_map.map[idx];
-            distance < 2000.0 && distance > 20.0 //&& *pt != mb.amulet_start
+            distance < 2000.0 && distance > 50.0 //&& *pt != mb.amulet_start
         });
         if can_place {
             placement = Some(Point::new(dimensions.x1, dimensions.y1));
