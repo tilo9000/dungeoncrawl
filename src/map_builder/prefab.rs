@@ -66,6 +66,8 @@ pub fn apply(mb: &mut MapBuilder, rng: &mut RandomNumberGenerator) {
             .chars()
             .filter(|a| *a != '\r' && *a != '\n')
             .collect();
+        // remove old monsters
+        mb.monster_spawns.clear();
         let mut i = 0;
         for ty in placement.y..placement.y + FORTRESS.y {
             for tx in placement.x..placement.x + FORTRESS.x {
@@ -90,6 +92,8 @@ pub fn apply(mb: &mut MapBuilder, rng: &mut RandomNumberGenerator) {
                 i += 1;
             }
         }
+        // spawn other monsters
+        mb.monster_spawns = mb.spawn_monsters(&mb.player_start, rng);
     } else {
         println!("No success in placing the Fortress");
     }
