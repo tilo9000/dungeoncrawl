@@ -18,6 +18,17 @@ pub fn get_idx(x: i32, y: i32) -> usize {
     ((y * SCREEN_WIDTH) + x) as usize
 }
 
+#[cfg(debug_assertions)]
+fn at_border(x: i32, y: i32, outline: Rect) -> bool {
+    let between_x = x >= outline.x1 && x <= outline.x2;
+    let between_y = y >= outline.y1 && y <= outline.y2;
+
+    (x == outline.x1 && between_y)
+        || (x == outline.x2 && between_y)
+        || (y == outline.y1 && between_x)
+        || (y == outline.y2 && between_x)
+}
+
 impl Map {
     pub fn new() -> Self {
         Self {
@@ -53,6 +64,28 @@ impl Map {
             }
         } else {
             None
+        }
+    }
+
+    /// Print out the complete map on console for debugging purposes
+    #[cfg(debug_assertions)]
+    pub fn dump(&self, outline: Option<Rect>) {
+        for y in 0..SCREEN_HEIGHT {
+            let mut line = String::new();
+            for x in 0..SCREEN_WIDTH {
+                let idx = get_idx(x, y);
+                let mut glyph = match self.tiles.get(idx).unwrap() {
+                    TileType::Floor => '.',
+                    TileType::Wall => '#',
+                };
+                if let Some(outl) = outline {
+                    if at_border(x, y, outl) {
+                        glyph = '*';
+                    }
+                }
+                line.push(glyph);
+            }
+            println!("{:02} {}", y, line);
         }
     }
 }
