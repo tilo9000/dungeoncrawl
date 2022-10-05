@@ -168,12 +168,20 @@ fn main() -> BError {
         .with_dimensions(DISPLAY_WIDTH, DISPLAY_HEIGHT)
         .with_tile_dimensions(32, 32)
         .with_resource_path("resources/")
-        .with_font("dungeonfont.png", 32, 32)
+        .with_font("DungeonCrawl_ProjectUtumnoTileset.png", 32, 32)
         .with_font("terminal8x8.png", 8, 8)
         // MAP_LAYER 0
-        .with_simple_console(DISPLAY_WIDTH, DISPLAY_HEIGHT, "dungeonfont.png")
+        .with_simple_console(
+            DISPLAY_WIDTH,
+            DISPLAY_HEIGHT,
+            "DungeonCrawl_ProjectUtumnoTileset.png",
+        )
         // DISPLAY_LAYER 1
-        .with_simple_console_no_bg(DISPLAY_WIDTH, DISPLAY_HEIGHT, "dungeonfont.png")
+        .with_simple_console_no_bg(
+            DISPLAY_WIDTH,
+            DISPLAY_HEIGHT,
+            "DungeonCrawl_ProjectUtumnoTileset.png",
+        )
         // HUD_LAYER 2
         .with_simple_console_no_bg(DISPLAY_WIDTH * 4, DISPLAY_HEIGHT * 4, "terminal8x8.png")
         .build()?;
