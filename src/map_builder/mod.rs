@@ -34,6 +34,9 @@ impl MapBuilder {
         };
         let mut mb = architect.new(rng);
         prefab::apply(&mut mb, rng);
+        #[cfg(debug_assertions)]
+        println!("Monsters:{}", mb.monster_spawns.len());
+
         mb
     }
 
@@ -125,7 +128,7 @@ impl MapBuilder {
         }
     }
 
-    fn spawn_monsters(&self, start: &Point, rng: &mut RandomNumberGenerator) -> Vec<Point> {
+    fn spawn_monsters(&mut self, rng: &mut RandomNumberGenerator) {
         const NUM_MONSTERS: usize = 50;
         let mut spawnable_tiles: Vec<Point> = self
             .map
@@ -134,18 +137,18 @@ impl MapBuilder {
             .enumerate()
             .filter(|(idx, t)| {
                 **t == TileType::Floor
-                    && DistanceAlg::Pythagoras.distance2d(*start, self.map.index_to_point2d(*idx))
+                    && DistanceAlg::Pythagoras
+                        .distance2d(self.player_start, self.map.index_to_point2d(*idx))
                         > 10.0
             })
             .map(|(idx, _)| self.map.index_to_point2d(idx))
             .collect();
         let mut spawns = Vec::new();
-        for _ in 0..NUM_MONSTERS {
+        for _ in 0..NUM_MONSTERS - self.monster_spawns.len() {
             let target_index = rng.random_slice_index(&spawnable_tiles).unwrap();
             spawns.push(spawnable_tiles[target_index].clone());
             spawnable_tiles.remove(target_index);
         }
-
-        spawns
+        self.monster_spawns.append(&mut spawns);
     }
 }

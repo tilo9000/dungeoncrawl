@@ -93,7 +93,7 @@ pub fn apply(mb: &mut MapBuilder, rng: &mut RandomNumberGenerator) {
             }
         }
         // spawn other monsters
-        mb.monster_spawns = mb.spawn_monsters(&mb.player_start, rng);
+        mb.spawn_monsters(rng);
     } else {
         println!("No success in placing the Fortress");
     }
