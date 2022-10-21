@@ -12,7 +12,7 @@ mod themes;
 
 use automata::CellularAutomataArchitect;
 use drunkard::DrunkardsWalkArchitect;
-use empty::EmptyArchitect;
+//use empty::EmptyArchitect;
 use rooms::RoomsArchitect;
 
 trait MapArchitect {
